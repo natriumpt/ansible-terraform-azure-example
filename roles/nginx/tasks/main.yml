@@ -1,0 +1,25 @@
+---
+# tasks file for nginx
+
+- name: Create nginx site config from template
+  template:
+    src: 'nginx.j2'
+    dest: '/etc/nginx/sites-available/{{ app_name }}'
+
+- name: Remove default nginx site config
+  file:
+    path: '/etc/nginx/sites-enabled/default'
+    state: absent
+
+- name: Enable nginx site
+  file:
+    src: '/etc/nginx/sites-available/{{ app_name }}'
+    dest: '/etc/nginx/sites-enabled/{{ app_name }}'
+    state: link
+    force: yes
+  notify: Enable and restart nginx
+  
+- name: Create allow rule on firewall for nginx
+  ufw:
+    rule: allow
+    name: Nginx Full

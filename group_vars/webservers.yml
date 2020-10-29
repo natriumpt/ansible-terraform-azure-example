@@ -1,0 +1,6 @@
+app_name: 'hello-py'
+app_user: '{{ app_name }}'
+app_destination_dir: '/home/{{ app_user }}/{{ app_name }}'
+ansible_python_interpreter: auto
+repository_url: 'https://github.com/natriumpt/flask-docker-example.git'
+required_packages: ['git', 'ufw', 'nginx', 'python3-dev', 'python3-pip']

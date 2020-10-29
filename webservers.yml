@@ -1,0 +1,7 @@
+- name: webservers.yml
+  hosts: webservers
+  become: yes
+  roles:
+    - { role: common,    tags: ['common']}
+    - { role: flask-app, tags: ['flask-app', 'flask']}
+    - { role: nginx,     tags: ['nginx']}

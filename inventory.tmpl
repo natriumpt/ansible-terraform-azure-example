@@ -1,0 +1,4 @@
+[webservers]
+%{ for index, port in ssh-port ~}
+${vm-name[index]} ansible_host=${public-ip} ansible_user=admin_user ansible_port=${port}
+%{ endfor ~}

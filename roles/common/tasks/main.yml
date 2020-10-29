@@ -1,0 +1,20 @@
+---
+# tasks file for common
+
+- name: Install/update required apt packages
+  apt:
+    name: '{{ required_packages }}'
+    update_cache: yes
+    state: latest
+
+- name: Install virtualenv via pip
+  pip:
+    name: virtualenv
+    state: present
+
+- name: Ensure app user is present
+  user:
+    name: "{{ app_user }}"
+    state: present
+    create_home: true
+    shell: /bin/bash

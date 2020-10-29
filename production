@@ -1,0 +1,2 @@
+[webservers]
+www[1:4].example.com

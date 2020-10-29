@@ -1,0 +1,2 @@
+[webservers]
+staging[1:4].example.com

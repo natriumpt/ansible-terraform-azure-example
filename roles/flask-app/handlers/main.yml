@@ -1,0 +1,9 @@
+---
+# handlers file for flask
+
+- name: Enable and restart app service
+  service:
+    name: '{{ app_name }}.service'
+    state: restarted
+    enabled: yes
+  become: yes

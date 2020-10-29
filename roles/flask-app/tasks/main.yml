@@ -1,0 +1,21 @@
+---
+# tasks file for flask
+
+- name: Pull from git repository
+  git:
+    repo: '{{ repository_url }}'
+    dest: '{{ app_destination_dir }}'
+    update: yes
+  become_user: '{{ app_user}}'
+
+- name: Install modules in a virtualenv
+  pip:
+    requirements: '{{ app_destination_dir }}/requirements.txt'
+    virtualenv: '{{ app_destination_dir }}/env'
+  become_user: '{{ app_user}}'
+
+- name: Create systemd service config from template
+  template:
+    src: 'service.j2'
+    dest: '/etc/systemd/system/{{ app_name }}.service'
+  notify: Enable and restart app service
